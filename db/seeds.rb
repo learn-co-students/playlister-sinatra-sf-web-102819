@@ -2,6 +2,6 @@
 
 require_relative "../config/environment.rb"
 
-LibraryParser.parse
-binding.pry
-puts "hello"
+# LibraryParser.parse
+# binding.pry
+# puts "hello"
