@@ -21,11 +21,34 @@ class ApplicationController < Sinatra::Base
     erb :"/genres/index"
   end
 
+  get '/songs/new' do
+    erb :"/songs/new"
+  end
+
+  post '/songs' do
+    song = Song.create("name" => params[:Name])
+    redirect "/songs/#{song.slug}"
+  end
+
   get '/songs/:slug' do
     @song = Song.all.find do |song|
       song.slug == params[:slug]
     end
     erb :"/songs/show"
+  end
+
+  get '/artists/:slug' do
+    @artist = Artist.all.find do |artist|
+      artist.slug == params[:slug]
+    end
+    erb :"/artists/show"
+  end
+
+  get '/genres/:slug' do
+    @genre = Genre.all.find do |genre|
+      genre.slug == params[:slug]
+    end
+    erb :"/genres/show"
   end
 
 end
