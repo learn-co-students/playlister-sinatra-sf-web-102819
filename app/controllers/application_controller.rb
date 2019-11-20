@@ -21,7 +21,10 @@ class ApplicationController < Sinatra::Base
     erb :"/genres/index"
   end
 
-  get 'songs/:slug' do
+  get '/songs/:slug' do
+    @song = Song.all.find do |song|
+      song.slug == params[:slug]
+    end
     erb :"/songs/show"
   end
 
