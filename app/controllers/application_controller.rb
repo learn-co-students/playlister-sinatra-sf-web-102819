@@ -22,12 +22,15 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/songs/new' do
+    @genres = Genre.all
     erb :"/songs/new"
   end
 
   post '/songs' do
-    song = Song.create("name" => params[:Name])
-    redirect "/songs/#{song.slug}"
+    binding.pry
+      artist = Artist.find_or_create_by("name"=> params["Artist Name"])
+      song = Song.create("name" => params[:Name], "artist_id" => artist.id)
+      redirect "/songs/#{song.slug}"
   end
 
   get '/songs/:slug' do
